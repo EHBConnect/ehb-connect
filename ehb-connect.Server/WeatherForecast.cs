@@ -1,4 +1,4 @@
-namespace EHBConnect.API
+namespace ehb_connect.Server
 {
     public class WeatherForecast
     {

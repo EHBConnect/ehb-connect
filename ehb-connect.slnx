@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="ehb-connect.client/ehb-connect.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="ehb-connect.Server/ehb-connect.Server.csproj" />
+</Solution>
