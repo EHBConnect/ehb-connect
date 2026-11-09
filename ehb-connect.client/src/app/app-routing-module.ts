@@ -15,11 +15,11 @@ const routes: Routes = [
     component: Overview
   },
   {
-    path: 'projects',
+    path: 'find-projects',
     component: FindProjects
   },
   {
-    path: 'skill-excange',
+    path: 'skill-exchange',
     component: SkillExchange
   },
   {

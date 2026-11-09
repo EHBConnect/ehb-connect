@@ -9,6 +9,7 @@ import { SkillExchange } from './pages/skill-exchange/skill-exchange';
 import { ProjectMatches } from './pages/project-matches/project-matches';
 import { Messages } from './pages/messages/messages';
 import { Profile } from './pages/profile/profile';
+import { Sidebar } from './components/sidebar/sidebar';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { Profile } from './pages/profile/profile';
     SkillExchange,
     ProjectMatches,
     Messages,
-    Profile
+    Profile,
+    Sidebar
   ],
   imports: [
     BrowserModule, HttpClientModule,
