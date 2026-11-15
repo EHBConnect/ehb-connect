@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 import { Register } from './register';
 
 describe('Register', () => {
