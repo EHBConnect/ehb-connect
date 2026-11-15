@@ -8,6 +8,7 @@ describe('Login', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, RouterModule.forRoot([])],
       declarations: [Login]
     })
     .compileComponents();
