@@ -8,6 +8,7 @@ describe('Register', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, RouterModule.forRoot([])],
       declarations: [Register]
     })
     .compileComponents();
