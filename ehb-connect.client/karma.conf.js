@@ -7,7 +7,7 @@
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
-      require('@angular-devkit/build-angular/plugins/karma')
+      // require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
       jasmine: {
@@ -35,6 +35,12 @@
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
+        customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
     singleRun: false,
     restartOnFileChange: true,
     listenAddress: 'localhost',
