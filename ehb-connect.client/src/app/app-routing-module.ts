@@ -6,12 +6,32 @@ import { ProjectMatches } from './pages/project-matches/project-matches';
 import { Messages } from './pages/messages/messages';
 import { Profile } from './pages/profile/profile';
 import { FindProjects } from './pages/find-projects/find-projects';
+import { Welcome } from './pages/welcome/welcome';
+import { Login } from './pages/login/login';
+import { Register } from './pages/register/register';
 
-//Routes naar de vershillende views
+//Routes naar de verschillende views
 
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: 'welcome'
+  },
+  {
+    path: 'welcome',
+    component: Welcome
+  },
+  {
+    path: 'login',
+    component: Login
+  },
+  {
+    path: 'register',
+    component: Register
+  },
+  {
+    path: 'overview',
     component: Overview
   },
   {
@@ -34,6 +54,10 @@ const routes: Routes = [
     path: 'profile',
     component: Profile
   },
+  {
+    path: '**',
+    redirectTo: 'welcome'
+  }
 ];
 
 @NgModule({
@@ -41,3 +65,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

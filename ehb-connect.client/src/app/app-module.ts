@@ -10,6 +10,10 @@ import { ProjectMatches } from './pages/project-matches/project-matches';
 import { Messages } from './pages/messages/messages';
 import { Profile } from './pages/profile/profile';
 import { Sidebar } from './components/sidebar/sidebar';
+import { Welcome } from './pages/welcome/welcome';
+import { Login } from './pages/login/login';
+import { Register } from './pages/register/register';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,11 +24,14 @@ import { Sidebar } from './components/sidebar/sidebar';
     ProjectMatches,
     Messages,
     Profile,
-    Sidebar
+    Sidebar,
+    Welcome,
+    Login,
+    Register
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule, ReactiveFormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
