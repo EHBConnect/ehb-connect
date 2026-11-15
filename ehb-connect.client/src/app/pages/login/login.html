@@ -1,0 +1,68 @@
+
+<section class="auth-page">
+  <div class="auth-card">
+    <a routerLink="/welcome" class="back-link">
+      ← Terug
+    </a>
+
+    <p class="eyebrow">EHB CONNECT</p>
+    <h1>Welkom terug!</h1>
+
+    <p class="subtitle">
+      Log in om je projecten en connecties te bekijken.
+    </p>
+
+    <form [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+          novalidate>
+
+      <div class="form-field">
+        <label for="email">E-mailadres</label>
+
+        <input id="email"
+               type="email"
+               formControlName="email"
+               autocomplete="username"
+               placeholder="naam@voorbeeld.be" />
+
+        @if (submitted && form.controls.email.invalid) {
+        <small class="error">
+          Geef een geldig e-mailadres op.
+        </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="password">Wachtwoord</label>
+
+        <input id="password"
+               type="password"
+               formControlName="password"
+               autocomplete="current-password"
+               placeholder="Je wachtwoord" />
+
+        @if (submitted && form.controls.password.invalid) {
+        <small class="error">
+          Wachtwoord is verplicht.
+        </small>
+        }
+      </div>
+
+      <button type="submit" class="primary-button full-width">
+        Inloggen
+      </button>
+
+      @if (message) {
+      <p class="info-message" role="status">
+        {{ message }}
+      </p>
+      }
+    </form>
+
+    <p class="form-footer">
+      Nog geen account?
+      <a routerLink="/register">Registreer je hier</a>
+    </p>
+  </div>
+</section>
+

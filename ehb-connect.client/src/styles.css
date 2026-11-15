@@ -1,1 +1,206 @@
-/* You can add global styles to this file, and also import other style files */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #24364b;
+  background: #f5f8fb;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.welcome-page,
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: radial-gradient(circle at top left, #dcecf5, transparent 45%), #f5f8fb;
+}
+
+.welcome-content,
+.auth-card {
+  width: 100%;
+  background: white;
+  border: 1px solid #e3eaf0;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(35, 60, 85, 0.08);
+}
+
+.welcome-content {
+  max-width: 660px;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.auth-card {
+  max-width: 460px;
+  padding: 38px;
+}
+
+.brand-mark {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: #215c81;
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.eyebrow {
+  color: #357da3;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 1.2;
+  margin: 12px 0 16px;
+}
+
+.intro,
+.subtitle,
+.helper-text {
+  color: #617488;
+  line-height: 1.7;
+}
+
+.welcome-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.primary-button,
+.secondary-button {
+  display: inline-block;
+  padding: 13px 24px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-button {
+  background: #215c81;
+  color: white;
+  border: 1px solid #215c81;
+}
+
+  .primary-button:hover {
+    background: #174663;
+  }
+
+.secondary-button {
+  background: white;
+  color: #215c81;
+  border: 1px solid #215c81;
+}
+
+  .secondary-button:hover {
+    background: #eaf3f8;
+  }
+
+  .primary-button:focus-visible,
+  .secondary-button:focus-visible,
+  .back-link:focus-visible,
+  input:focus-visible {
+    outline: 3px solid #7bc2e8;
+    outline-offset: 2px;
+  }
+
+.full-width {
+  width: 100%;
+}
+
+.helper-text {
+  margin-top: 28px;
+  font-size: 13px;
+}
+
+.back-link {
+  color: #215c81;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.form-field {
+  margin: 22px 0;
+}
+
+  .form-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .form-field input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #c9d5e0;
+    border-radius: 9px;
+    background: white;
+  }
+
+    .form-field input:focus {
+      border-color: #215c81;
+    }
+
+.error {
+  display: block;
+  margin-top: 6px;
+  color: #ad2738;
+  font-size: 13px;
+}
+
+.info-message {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #eaf3f8;
+  color: #215c81;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.form-footer {
+  margin-top: 26px;
+  text-align: center;
+  font-size: 14px;
+}
+
+  .form-footer a {
+    color: #215c81;
+    font-weight: 600;
+  }
+
+@media (max-width: 550px) {
+  .welcome-content,
+  .auth-card {
+    padding: 28px 22px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  .welcome-actions {
+    flex-direction: column;
+  }
+}
