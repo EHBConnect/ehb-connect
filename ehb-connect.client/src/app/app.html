@@ -1,16 +1,16 @@
 <!--
-The sidebar remains visible on every page.
+The sidebar remains visible on every page except welcome, login and registerpage (before login/register). 
 The router-outlet loads the active page component!
 -->
-<div class="app-layout">
+<div class="app-layout"
+     [class.auth-layout]="isAuthPage()">
 
+  @if (!isAuthPage()) {
   <app-sidebar></app-sidebar>
+  }
 
-  <!-- Show page chosen by the router -->
   <main>
-
     <router-outlet></router-outlet>
-
   </main>
 
 </div>

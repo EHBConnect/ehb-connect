@@ -1,0 +1,103 @@
+
+<section class="auth-page">
+  <div class="auth-card">
+    <a routerLink="/welcome" class="back-link">
+      ← Terug
+    </a>
+
+    <p class="eyebrow">EHB CONNECT</p>
+    <h1>Account aanmaken</h1>
+    <p class="subtitle">
+      Registreer je om studenten te ontmoeten
+      en samen aan projecten te werken.
+    </p>
+
+    <form [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+          novalidate>
+
+      <div class="form-field">
+        <label for="email">E-mailadres</label>
+
+        <input id="email"
+               type="email"
+               formControlName="email"
+               autocomplete="email"
+               placeholder="naam@voorbeeld.be" />
+
+        @if (submitted &&
+        form.controls.email.hasError('required')) {
+        <small class="error">
+          E-mailadres is verplicht.
+        </small>
+        }
+
+        @if (submitted &&
+        form.controls.email.hasError('email')) {
+        <small class="error">
+          Geef een geldig e-mailadres op.
+        </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="password">Wachtwoord</label>
+
+        <input id="password"
+               type="password"
+               formControlName="password"
+               autocomplete="new-password"
+               placeholder="Minstens 8 tekens" />
+
+        @if (submitted &&
+        form.controls.password.invalid) {
+        <small class="error">
+          Het wachtwoord moet minstens 8 tekens bevatten.
+        </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="confirmPassword">
+          Bevestig wachtwoord
+        </label>
+
+        <input id="confirmPassword"
+               type="password"
+               formControlName="confirmPassword"
+               autocomplete="new-password"
+               placeholder="Herhaal je wachtwoord" />
+
+        @if (submitted &&
+        form.controls.confirmPassword.hasError('required')) {
+        <small class="error">
+          Bevestig je wachtwoord.
+        </small>
+        }
+
+        @if (submitted &&
+        !form.controls.confirmPassword.hasError('required') &&
+        passwordsDifferent) {
+        <small class="error">
+          De wachtwoorden komen niet overeen.
+        </small>
+        }
+      </div>
+
+      <button type="submit" class="primary-button full-width">
+        Registreren
+      </button>
+
+      @if (message) {
+      <p class="info-message" role="status">
+        {{ message }}
+      </p>
+      }
+    </form>
+
+    <p class="form-footer">
+      Heb je al een account?
+      <a routerLink="/login">Inloggen</a>
+    </p>
+  </div>
+</section>
