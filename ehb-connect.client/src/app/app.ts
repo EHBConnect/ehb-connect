@@ -1,12 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, signal } from '@angular/core';
-
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
+import { Component, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,25 +7,19 @@ interface WeatherForecast {
   standalone: false,
   styleUrl: './app.css'
 })
-export class App implements OnInit {
-  public forecasts: WeatherForecast[] = [];
+export class App {
+  protected readonly title = signal('Ehb connect');
 
-  constructor(private http: HttpClient) {}
+  constructor(public router: Router) { }
 
-  ngOnInit() {
-    this.getForecasts();
-  }
+  isAuthPage(): boolean {
+    const path = this.router.url.split('?')[0];
 
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result) => {
-        this.forecasts = result;
-      },
-      (error) => {
-        console.error(error);
-      }
+    return (
+      path === '/' ||
+      path === '/welcome' ||
+      path === '/login' ||
+      path === '/register'
     );
   }
-
-  protected readonly title = signal('ehb-connect.client');
 }
