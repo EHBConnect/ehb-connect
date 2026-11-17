@@ -1,4 +1,5 @@
-﻿using ehb_connect.Server.DTOs;
+﻿using ehb_connect.Server.DTO;
+using ehb_connect.Server.DTOs;
 using ehb_connect.Server.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -20,37 +21,37 @@ namespace ehb_connect.Server.Controllers
             _userManager = userManager;
         }
 
-        // Get all active users
+        // Get all visible users: public fields only, no e-mail (ASVS 15.3.1, R10, SAT 5)
 
         [HttpGet]
-        public async Task<IActionResult> GetAllUsers() 
+        public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userManager.Users
                 .Where(u => u.IsVisible)
-                .Select(u => new
-                {
+                .Select(u => new PublicProfileDto(
                     u.Id,
-                    u.FirstName, 
+                    u.FirstName,
                     u.LastName,
-                    u.Email,
-                    u.Role,
                     u.Campus,
                     u.Programme,
                     u.Availability,
-                    u.ProfileUpdatedAt
-                })
+                    u.ProfileUpdatedAt))
                 .ToListAsync();
             return Ok(users);
         }
 
-        // List all active and inactive users admin
+        // List all users, visible and hidden: admins only (ASVS 8.2.1, R04)
 
         [HttpGet("all")]
         public async Task<IActionResult> GetAllUsersForAdmin()
         {
+            if (!await IsAdminAsync())
+            {
+                return Forbid();
+            }
+
             var users = await _userManager.Users
-                .Select(u => new
-                {
+                .Select(u => new FullProfileDto(
                     u.Id,
                     u.FirstName,
                     u.LastName,
@@ -58,15 +59,17 @@ namespace ehb_connect.Server.Controllers
                     u.Role,
                     u.Campus,
                     u.Programme,
-                    u.IsVisible, 
-                    u.ProfileUpdatedAt
-                })
+                    u.Availability,
+                    u.IsVisible,
+                    u.ProfileUpdatedAt))
                 .ToListAsync();
 
             return Ok(users);
         }
 
-        // To get a specific profile by ID
+        // Get one profile by ID.
+        // Owner or admin: full profile. Anyone else: public fields only, and hidden profiles
+        // answer exactly like a non-existing user, so their existence isn't revealed (ASVS 8.2.2, R10, SAT 3).
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(string id)
@@ -75,22 +78,21 @@ namespace ehb_connect.Server.Controllers
 
             if (user == null)
             {
-                return NotFound(new {message = "User not found"});
+                return NotFound(new { message = "User not found" });
             }
 
-            return Ok(new
+            var isOwner = _userManager.GetUserId(User) == user.Id;
+            if (isOwner || await IsAdminAsync())
             {
-                user.Id, 
-                user.FirstName,
-                user.LastName,
-                user.Email, 
-                user.Role,
-                user.Campus,
-                user.Programme,
-                user.Availability,
-                user.IsVisible,
-                user.ProfileUpdatedAt
-            });
+                return Ok(ToFullProfile(user));
+            }
+
+            if (!user.IsVisible)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            return Ok(ToPublicProfile(user));
         }
 
         // Update a user
@@ -195,5 +197,11 @@ namespace ehb_connect.Server.Controllers
             var currentUser = await _userManager.GetUserAsync(User);
             return currentUser != null && currentUser.Role == "Admin";
         }
+
+        private static PublicProfileDto ToPublicProfile(User u) =>
+            new(u.Id, u.FirstName, u.LastName, u.Campus, u.Programme, u.Availability, u.ProfileUpdatedAt);
+
+        private static FullProfileDto ToFullProfile(User u) =>
+            new(u.Id, u.FirstName, u.LastName, u.Email, u.Role, u.Campus, u.Programme, u.Availability, u.IsVisible, u.ProfileUpdatedAt);
     }
 }
