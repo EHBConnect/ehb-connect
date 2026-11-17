@@ -1,0 +1,25 @@
+# .github/dependabot.yml
+# Dependency update PRs + security alerts for every ecosystem in the repo.
+# Remediation timeframes for these updates are documented under ASVS 15.1.1.
+
+version: 2
+updates:
+  # Keeps the SHA-pinned GitHub Actions in security.yml, ci.yml and docs-weekly.yml up to date
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Angular front end
+  - package-ecosystem: "npm"
+    directory: "/ehb-connect.client"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  # ASP.NET Core back end
+  - package-ecosystem: "nuget"
+    directory: "/ehb-connect.Server"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
