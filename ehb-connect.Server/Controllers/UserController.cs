@@ -1,5 +1,4 @@
 ﻿using ehb_connect.Server.DTO;
-using ehb_connect.Server.DTOs;
 using ehb_connect.Server.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
