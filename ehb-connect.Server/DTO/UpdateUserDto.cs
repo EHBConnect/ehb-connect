@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ehb_connect.Server.DTOs
+namespace ehb_connect.Server.DTO
 {
 	public class UpdateUserDto
 	{
