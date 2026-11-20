@@ -14,6 +14,14 @@ namespace ehb_connect.Server.Data
         {
             base.OnModelCreating(builder);
             builder.Entity<User>().ToTable("Users");
+            builder.Entity<Project>().ToTable("Projects");
+
+            builder.Entity<Project>()
+                .HasOne(p => p.Owner) // One Project has one Owner (User)
+                .WithMany() // One User can own many Projects
+                .HasForeignKey(p => p.OwnerId) // Foreign key in Project table: OwnerId
+                .HasPrincipalKey(u => u.UserId) // Principal key in User table: UserId
+                .OnDelete(DeleteBehavior.Cascade); // When a User is deleted, all their Projects are also deleted
         }
     }
 }
