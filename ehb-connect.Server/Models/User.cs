@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Azure.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace ehb_connect.Server.Models
@@ -34,7 +35,7 @@ namespace ehb_connect.Server.Models
 
         public DateTime ProfileUpdatedAt { get; set; } = DateTime.UtcNow;
 
-
+        public ICollection<UserSkill> UserSkills { get; set; } = new List<UserSkill>();
 
 
     }

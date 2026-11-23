@@ -22,6 +22,23 @@ namespace ehb_connect.Server.Data
                 .HasForeignKey(p => p.OwnerId) // Foreign key in Project table: OwnerId
                 .HasPrincipalKey(u => u.UserId) // Principal key in User table: UserId
                 .OnDelete(DeleteBehavior.Cascade); // When a User is deleted, all their Projects are also deleted
+
+            // Composed PK
+            builder.Entity<UserSkill>()
+                .HasKey(us => new
+                {
+                    us.UserId,
+                    us.SkillId,
+                    us.Type
+                });
+
+            // Composed PK
+            builder.Entity<ProjectSkill>()
+                .HasKey(ps => new
+                {
+                    ps.ProjectId,
+                    ps.SkillId
+                });
         }
     }
 }
