@@ -28,6 +28,17 @@ updates:
       # Everything else: minor and patch updates in one PR
       npm-minor-and-patch:
         update-types: ["minor", "patch"]
+    ignore:
+      # Angular majors (e.g. 20 -> 22) are a team decision, done with `ng update`, one major at a time.
+      # ng update also picks the TypeScript and zone.js versions that this Angular version supports.
+      - dependency-name: "@angular/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@angular-devkit/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: "zone.js"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
 
   # ASP.NET Core back end
   - package-ecosystem: "nuget"
