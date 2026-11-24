@@ -39,6 +39,21 @@ namespace ehb_connect.Server.Data
                     ps.ProjectId,
                     ps.SkillId
                 });
+
+            // Relations with user (explicit)
+            builder.Entity<ContactRequest>()
+                .HasOne(cr => cr.Sender)
+                .WithMany(u => u.SentContactRequests)
+                .HasForeignKey(cr => cr.SenderId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ContactRequest>()
+                .HasOne(cr => cr.Receiver)
+                .WithMany (u => u.ReceivedContactRequests)
+                .HasForeignKey (cr => cr.ReceiverId)
+                .OnDelete (DeleteBehavior.Restrict);
+
+            
         }
     }
 }
