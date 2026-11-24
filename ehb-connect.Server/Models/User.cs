@@ -37,6 +37,10 @@ namespace ehb_connect.Server.Models
 
         public ICollection<UserSkill> UserSkills { get; set; } = new List<UserSkill>();
 
+        public ICollection<ContactRequest> SentContactRequests { get; set; } = new List<ContactRequest>();
+
+        public ICollection<ContactRequest> ReceivedContactRequests { get; set; } = new List<ContactRequest>();
+
 
     }
 }
