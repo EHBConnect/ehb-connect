@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Net.WebSockets;
 
 namespace ehb_connect.Server.Models
 {
@@ -34,6 +35,8 @@ namespace ehb_connect.Server.Models
 
         // Optional: timestamp when the request was responded to
         public DateTime? RespondedAt { get; set; }
+
+        public ICollection<CollaborationAgreement> CollaborationAgreements { get; set; } = new List<CollaborationAgreement>();
 
     }
 }

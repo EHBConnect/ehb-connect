@@ -52,6 +52,11 @@ namespace ehb_connect.Server.Data
                 .WithMany (u => u.ReceivedContactRequests)
                 .HasForeignKey (cr => cr.ReceiverId)
                 .OnDelete (DeleteBehavior.Restrict);
+
+            builder.Entity<ContactRequest>()
+                .HasMany(c => c.CollaborationAgreements)
+                .WithOne(a => a.ContactRequest)
+                .HasForeignKey(a => a.RequestId);
    
         }
     }
