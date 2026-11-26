@@ -1,6 +1,11 @@
 ﻿namespace ehb_connect.Server.Models
 {
-    public class ContactRequestStatus
+    public enum ContactRequestStatus
     {
+        Pending,
+        Accepted,
+        Declined,
+        Cancelled,
+        Expired
     }
 }
