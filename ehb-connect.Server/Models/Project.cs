@@ -36,5 +36,8 @@ namespace ehb_connect.Server.Models
         // Optional fields (possibly nullable)
         public string? Campus { get; set; }
         public int? MaxMembers { get; set; }
+
+        // 1-many relationship
+        public ICollection<ProjectMember> ProjectMembers { get; set; } = new List<ProjectMember>();
     }
 }

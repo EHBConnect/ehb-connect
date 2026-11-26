@@ -34,6 +34,9 @@ namespace ehb_connect.Server.Models
 
         public DateTime ProfileUpdatedAt { get; set; } = DateTime.UtcNow;
 
+        // 1-many relationship
+        public ICollection<ProjectMember> ProjectMembers { get; set; } = new List<ProjectMember>();
+
 
 
 
