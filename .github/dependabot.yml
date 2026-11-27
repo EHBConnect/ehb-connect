@@ -1,14 +1,19 @@
 # .github/dependabot.yml
 # Dependency update PRs + security alerts for every ecosystem in the repo.
+# Grouped, so we get a few PRs a week instead of one per package.
+# Security updates for known vulnerabilities still arrive as separate PRs: those go first.
 # Remediation timeframes for these updates are documented under ASVS 15.1.1.
 
 version: 2
 updates:
-  # Keeps the SHA-pinned GitHub Actions in security.yml, ci.yml and docs-weekly.yml up to date
+  # GitHub Actions in security.yml, ci.yml and docs-weekly.yml: one PR for all of them
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      github-actions:
+        patterns: ["*"]
 
   # Angular front end
   - package-ecosystem: "npm"
@@ -16,6 +21,24 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    groups:
+      # Angular packages must always move together, to the same version
+      angular:
+        patterns: ["@angular/*", "@angular-devkit/*", "zone.js", "rxjs", "typescript"]
+      # Everything else: minor and patch updates in one PR
+      npm-minor-and-patch:
+        update-types: ["minor", "patch"]
+    ignore:
+      # Angular majors (e.g. 20 -> 22) are a team decision, done with `ng update`, one major at a time.
+      # ng update also picks the TypeScript and zone.js versions that this Angular version supports.
+      - dependency-name: "@angular/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@angular-devkit/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: "zone.js"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
 
   # ASP.NET Core back end
   - package-ecosystem: "nuget"
@@ -23,3 +46,12 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    groups:
+      dotnet-minor-and-patch:
+        update-types: ["minor", "patch"]
+    ignore:
+      # We target .NET 10 (CI uses 10.0.x). Major versions (11.x) are a team decision, not an automatic update.
+      - dependency-name: "Microsoft.*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "System.*"
+        update-types: ["version-update:semver-major"]
