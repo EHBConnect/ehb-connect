@@ -28,7 +28,8 @@ namespace ehb_connect.Server.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         //Foreign key for the User entity (Owner of the project)
-        public int OwnerId { get; set; }
+        [Required]
+        public string OwnerId { get; set; } = string.Empty;
 
         // Navigation property for the User entity (Owner of the project)
         public User? Owner { get; set; }
