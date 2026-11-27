@@ -5,6 +5,8 @@ namespace ehb_connect.Server.Models
 {
     public class User : IdentityUser
     {
+        
+
         [Required]
         [StringLength(50)]
         public string FirstName { get; set; } = string.Empty;
@@ -30,6 +32,9 @@ namespace ehb_connect.Server.Models
         public bool IsVisible { get; set; } = true;
 
         public DateTime ProfileUpdatedAt { get; set; } = DateTime.UtcNow;
+
+        // 1-many relationship
+        public ICollection<ProjectMember> ProjectMembers { get; set; } = new List<ProjectMember>();
 
 
 
