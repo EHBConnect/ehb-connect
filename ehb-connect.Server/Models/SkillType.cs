@@ -2,7 +2,7 @@
 {
     public enum SkillType
     {
-        Aangeboden = 1,
-        Gezocht = 2
+        Offered = 1,
+        LookingFor = 2
     }
 }

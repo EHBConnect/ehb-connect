@@ -17,7 +17,7 @@ namespace ehb_connect.Server.Models
 
         // Best to use an enum for the status to ensure type safety and avoid magic strings
         // Adjust in ERD
-        public ProjectStatus Status { get; set; }
+        public ProjectStatus Status { get; set; } = ProjectStatus.Open;
 
         [Required]
         public DateTime StartDate { get; set; }
@@ -28,7 +28,8 @@ namespace ehb_connect.Server.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         //Foreign key for the User entity (Owner of the project)
-        public int OwnerId { get; set; }
+        [Required]
+        public string OwnerId { get; set; } = string.Empty;
 
         // Navigation property for the User entity (Owner of the project)
         public User? Owner { get; set; }
@@ -36,7 +37,7 @@ namespace ehb_connect.Server.Models
         // Optional fields (possibly nullable)
         public string? Campus { get; set; }
         public int? MaxMembers { get; set; }
-
+        public ICollection<ProjectMember> ProjectMembers { get; set; } = new List<ProjectMember>();
         public ICollection<ProjectSkill> ProjectSkills { get; set; } = new List<ProjectSkill>();
     }
 }

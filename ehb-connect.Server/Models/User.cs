@@ -6,8 +6,7 @@ namespace ehb_connect.Server.Models
 {
     public class User : IdentityUser
     {
-        // Primary key for the User entity
-        public int UserId { get; set; }
+        
 
         [Required]
         [StringLength(50)]
@@ -35,8 +34,9 @@ namespace ehb_connect.Server.Models
 
         public DateTime ProfileUpdatedAt { get; set; } = DateTime.UtcNow;
 
+        public ICollection<ProjectMember> ProjectMembers { get; set; } = new List<ProjectMember>();
         public ICollection<UserSkill> UserSkills { get; set; } = new List<UserSkill>();
-
-
+        public ICollection<ContactRequest> SentContactRequests { get; set; } = new List<ContactRequest>();
+        public ICollection<ContactRequest> ReceivedContactRequests { get; set; }
     }
 }

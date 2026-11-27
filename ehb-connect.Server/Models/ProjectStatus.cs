@@ -2,7 +2,7 @@
 {
     public enum ProjectStatus
     {
-        OPEN,
+        Open,
         InProgress,
         Completed,
         Cancelled

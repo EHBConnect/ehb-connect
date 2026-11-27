@@ -3,7 +3,7 @@
     public enum SkillLevel: byte
     {
         Beginner = 1,
-        Gevorderd = 2,
+        Intermediate = 2,
         Expert = 3
     }
 }

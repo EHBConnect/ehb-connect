@@ -4,7 +4,7 @@ namespace ehb_connect.Server.Models
 {
     public class UserSkill
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
 
         //Navigation property to User
         [Required]
