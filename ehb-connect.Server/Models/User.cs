@@ -5,8 +5,7 @@ namespace ehb_connect.Server.Models
 {
     public class User : IdentityUser
     {
-        // Primary key for the User entity
-        public int UserId { get; set; }
+        
 
         [Required]
         [StringLength(50)]
