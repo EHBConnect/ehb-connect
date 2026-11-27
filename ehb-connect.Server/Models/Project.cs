@@ -17,7 +17,7 @@ namespace ehb_connect.Server.Models
 
         // Best to use an enum for the status to ensure type safety and avoid magic strings
         // Adjust in ERD
-        public ProjectStatus Status { get; set; }
+        public ProjectStatus Status { get; set; } = ProjectStatus.Open;
 
         [Required]
         public DateTime StartDate { get; set; }
@@ -37,8 +37,7 @@ namespace ehb_connect.Server.Models
         // Optional fields (possibly nullable)
         public string? Campus { get; set; }
         public int? MaxMembers { get; set; }
-
-        // 1-many relationship
         public ICollection<ProjectMember> ProjectMembers { get; set; } = new List<ProjectMember>();
+        public ICollection<ProjectSkill> ProjectSkills { get; set; } = new List<ProjectSkill>();
     }
 }

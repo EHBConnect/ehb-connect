@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Azure.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace ehb_connect.Server.Models
@@ -33,11 +34,9 @@ namespace ehb_connect.Server.Models
 
         public DateTime ProfileUpdatedAt { get; set; } = DateTime.UtcNow;
 
-        // 1-many relationship
         public ICollection<ProjectMember> ProjectMembers { get; set; } = new List<ProjectMember>();
-
-
-
-
+        public ICollection<UserSkill> UserSkills { get; set; } = new List<UserSkill>();
+        public ICollection<ContactRequest> SentContactRequests { get; set; } = new List<ContactRequest>();
+        public ICollection<ContactRequest> ReceivedContactRequests { get; set; }
     }
 }
